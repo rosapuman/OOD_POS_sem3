@@ -14,10 +14,11 @@ public class ExternalAccountingTest
 {
     private Sale sale;
     private ExternalAccountingSystem eAS;
+    private Controller control;
     @Before
     public void setUp()
     {
-        Controller control = new Controller();
+        control = new Controller();
         sale = control.startNewSale();
         eAS = new ExternalAccountingSystem();
     }
@@ -31,7 +32,7 @@ public class ExternalAccountingTest
     public void logSale()
     {
         ArrayList<SaleDTO> oldLogs = eAS.retrieveLogs();
-        eAS.logSale(sale);
+        eAS.logSale(control.endSale(sale));
         ArrayList<SaleDTO> newLogs = eAS.retrieveLogs();
         Assert.assertNotSame(oldLogs, newLogs);
     }

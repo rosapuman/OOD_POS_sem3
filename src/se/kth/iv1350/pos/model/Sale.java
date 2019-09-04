@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Sale
 {
+    private double totalAmount;
     private double runningTotal;
     private double vat;
     private ArrayList<ItemDTO> items;
@@ -63,23 +64,42 @@ public class Sale
     {
         while (true)
         {
-            System.out.println("Running total: " + runningTotal);
+            totalAmount = runningTotal;
+            System.out.println("Running total: " + totalAmount);
             if(runningTotal == 0)
                 break;
             System.out.print("Money: ");
             int amountOfMoney = scanner.nextInt();
-            runningTotal = runningTotal - amountOfMoney;
+            totalAmount = runningTotal - amountOfMoney;
 
-            if(runningTotal <= 0)
+            if(totalAmount <= 0)
                 break;
 
         }
 
-        if(runningTotal < 0)
+        if(totalAmount < 0)
         {
-            System.out.println("Total change: " + Math.abs(runningTotal) + "kr ");
+            System.out.println("Total change: " + Math.abs(totalAmount) + "kr ");
         }
-        System.out.println("Moms: " + getVatRate() + "kr ");
+        System.out.println("Moms: " + getVatRate() + "kr\n");
+    }
+
+    public SaleDTO makeSaleComplete(Sale sale)
+    {
+        return new SaleDTO(sale);
+    }
+
+    public String printSale()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("---\n");
+        for (ItemDTO item : items)
+        {
+            sb.append("- " + item.getName() + " " + item.getQuantity() + "st " + item.getPrice() * item.getQuantity() + "kr\n");
+        }
+        sb.append("Total: " + runningTotal + "kr");
+        sb.append("\n---\n");
+        return sb.toString();
     }
 
     public String toString()
@@ -90,7 +110,9 @@ public class Sale
         {
             sb.append("- " + item.getName() + " " + item.getQuantity() + "st " + item.getPrice() * item.getQuantity() + "kr\n");
         }
-        sb.append("Total: " + runningTotal + "kr");
+        sb.append("Total: " + runningTotal + "kr\n");
+        sb.append("Total change: " + Math.abs(totalAmount) + "kr\n");
+        sb.append("Moms: " + getVatRate() + "kr");
         sb.append("\n---\n");
         return sb.toString();
     }

@@ -13,6 +13,7 @@ public class Inventory
     {
         items = new ArrayList<>();
 
+        items.add(new ItemDTO("INVALID", 0, 0, 0, 0));
         items.add(new ItemDTO("choklad",5, 0.1,30, 10));
         items.add(new ItemDTO("nocco cola",9, 0.12,55, 30));
         items.add(new ItemDTO("tamponger",7, 0.15,64, 15));

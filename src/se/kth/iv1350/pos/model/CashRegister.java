@@ -34,9 +34,6 @@ public class CashRegister
             ItemDTO item = inventory.getItem(itemID);
             currentSale.updateSale(item);
         }
-        else {
-            System.out.println("Item not found");
-        }
     }
 
     public Sale payment()
@@ -45,9 +42,14 @@ public class CashRegister
         return currentSale;
     }
 
+    public SaleDTO endSale(Sale endSale)
+    {
+        return currentSale.makeSaleComplete(currentSale);
+    }
+
     public String showSale()
     {
-        return currentSale.toString();
+        return currentSale.printSale();
     }
 
     public double showVAT()

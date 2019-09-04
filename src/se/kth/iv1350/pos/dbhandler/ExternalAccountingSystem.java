@@ -15,10 +15,9 @@ public class ExternalAccountingSystem
         logList = new ArrayList<SaleDTO>();
     }
 
-    public void logSale(Sale completedSale)
+    public void logSale(SaleDTO completedSale)
     {
-        SaleDTO completedSaleDTO = new SaleDTO(completedSale);
-        logList.add(completedSaleDTO);
+        logList.add(completedSale);
     }
 
     ArrayList<SaleDTO> retrieveLogs()

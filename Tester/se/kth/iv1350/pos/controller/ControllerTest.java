@@ -26,7 +26,7 @@ public class ControllerTest
     public void endSaleNotNull()
     {
         sale = control.startNewSale();
-        SaleDTO saleDTO = new SaleDTO(control.endSale());
+        SaleDTO saleDTO = control.endSale(sale);
         Assert.assertNotNull("SaleDTO är null!", saleDTO);
     }
 }

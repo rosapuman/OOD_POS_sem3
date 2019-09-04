@@ -5,6 +5,7 @@ import se.kth.iv1350.pos.dbhandler.ExternalAccountingSystem;
 import se.kth.iv1350.pos.dbhandler.Inventory;
 import se.kth.iv1350.pos.model.CashRegister;
 import se.kth.iv1350.pos.model.Sale;
+import se.kth.iv1350.pos.model.SaleDTO;
 import se.kth.iv1350.pos.view.View;
 
 import java.util.Scanner;
@@ -19,7 +20,6 @@ class Main
         Inventory inventory          = new Inventory();
         Scanner scanner              = new Scanner(System.in);
 
-        //Skapa metoder här, scanItem osv
         contr.startNewSale();
         int scannerID;
         while(true)
@@ -31,6 +31,8 @@ class Main
                 break;
             }
         }
-        eAS.logSale(contr.endSale());
+        Sale completedSale = contr.pay();
+        contr.endSale(completedSale);
+        System.out.println("KVITTO:\n" + completedSale.toString());
     }
 }
