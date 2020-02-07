@@ -2,6 +2,7 @@ package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.dbhandler.ExternalAccountingSystem;
 import se.kth.iv1350.pos.model.CashRegister;
+import se.kth.iv1350.pos.model.ObserverSale;
 import se.kth.iv1350.pos.model.Sale;
 import se.kth.iv1350.pos.model.SaleDTO;
 
@@ -41,5 +42,10 @@ public class Controller
     public String showSale()
     {
         return cashRegister.showSale();
+    }
+
+    public void createNewObserver(ObserverSale saleOB)
+    {
+        cashRegister.addNewObeserverSale(saleOB);
     }
 }

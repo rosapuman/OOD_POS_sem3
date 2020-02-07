@@ -3,11 +3,16 @@ package se.kth.iv1350.pos.model;
 import se.kth.iv1350.pos.dbhandler.Inventory;
 import se.kth.iv1350.pos.dbhandler.ItemDTO;
 
+import java.util.ArrayList;
+
 public class CashRegister
 {
     private double change;
     private Inventory inventory = new Inventory();
     private Sale currentSale;
+    private float totalCashRegister;
+    ArrayList<ObserverSale> saleObservers = new ArrayList<ObserverSale>();
+
 
     public CashRegister()
     {
@@ -44,6 +49,8 @@ public class CashRegister
 
     public SaleDTO endSale(Sale endSale)
     {
+
+        informObserverSale();
         return currentSale.makeSaleComplete(currentSale);
     }
 
@@ -55,5 +62,13 @@ public class CashRegister
     public double showVAT()
     {
         return currentSale.getVatRate();
+    }
+
+    public void addNewObeserverSale(ObserverSale saleOB){saleObservers.add(saleOB);}
+
+    public void informObserverSale(){
+        for(ObserverSale saleOB : saleObservers){
+            saleOB.endedSaleUpdate(totalCashRegister);
+        }//HÄR ÄR JAG, KOLLA UPP AMOUNTNEEDED FÖR TOTALCASHREGISTER?????
     }
 }

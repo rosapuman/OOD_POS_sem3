@@ -6,6 +6,7 @@ import se.kth.iv1350.pos.dbhandler.Inventory;
 import se.kth.iv1350.pos.model.CashRegister;
 import se.kth.iv1350.pos.model.Sale;
 import se.kth.iv1350.pos.model.SaleDTO;
+import se.kth.iv1350.pos.view.SaleTotalView;
 import se.kth.iv1350.pos.view.View;
 
 import java.util.Scanner;
@@ -19,6 +20,7 @@ class Main
         ExternalAccountingSystem eAS = new ExternalAccountingSystem();
         Inventory inventory          = new Inventory();
         Scanner scanner              = new Scanner(System.in);
+        SaleTotalView totalSaleV     = new SaleTotalView();
 
         contr.startNewSale();
         int scannerID;
