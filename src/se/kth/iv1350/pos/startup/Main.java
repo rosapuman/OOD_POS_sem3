@@ -23,6 +23,7 @@ class Main
         SaleTotalView totalSaleV     = new SaleTotalView();
 
         contr.startNewSale();
+        contr.createNewObserver(totalSaleV);
         int scannerID;
         while(true)
         {
