@@ -69,6 +69,6 @@ public class CashRegister
     public void informObserverSale(){
         for(ObserverSale saleOB : saleObservers){
             saleOB.endedSaleUpdate(totalCashRegister);
-        }//HÄR ÄR JAG, KOLLA UPP AMOUNTNEEDED FÖR TOTALCASHREGISTER?????
+        }
     }
 }
