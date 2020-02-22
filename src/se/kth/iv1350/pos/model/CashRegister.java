@@ -4,6 +4,9 @@ import se.kth.iv1350.pos.dbhandler.Inventory;
 import se.kth.iv1350.pos.dbhandler.ItemDTO;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.*;
+import java.util.logging.Logger;
 
 public class CashRegister
 {
@@ -11,6 +14,7 @@ public class CashRegister
     private Inventory inventory = new Inventory();
     private Sale currentSale;
     private float totalCashRegister;
+    final static Logger log = Logger.getAnonymousLogger();
     ArrayList<ObserverSale> saleObservers = new ArrayList<ObserverSale>();
 
 
@@ -30,14 +34,25 @@ public class CashRegister
         return change;
     }
 
-    public void scanItem(int itemID)
+    public void scanItem(int itemID) throws Exception
     {
         boolean itemAvailable = inventory.checkItemID(itemID);
 
-        if(itemAvailable)
-        {
-            ItemDTO item = inventory.getItem(itemID);
-            currentSale.updateSale(item);
+        try {
+            if (itemAvailable) {
+                ItemDTO item = inventory.getItem(itemID);
+                currentSale.updateSale(item);
+            }
+        }
+        catch(DBFailureException dbException){
+            System.out.println("INTERNAL LOG:");
+            log.log(Level.SEVERE, "EXCEPTION HAS BEEN THROWN", dbException);
+            throw new DBFailureException();
+        }
+        catch(Exception idException){
+            System.out.println("INTERNAL LOG:");
+            log.log(Level.SEVERE, "EXCEPTION HAS BEEN THROWN", idException);
+            throw new IdentifierInvalidException();
         }
     }
 

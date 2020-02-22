@@ -1,5 +1,6 @@
 package se.kth.iv1350.pos.dbhandler;
 
+import se.kth.iv1350.pos.model.IdentifierInvalidException;
 import se.kth.iv1350.pos.model.Sale;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class Inventory
         return false;
     }
 
-    public ItemDTO getItem(int itemID){
+    public ItemDTO getItem(int itemID) throws IdentifierInvalidException {
 
         for(ItemDTO currentItem : items){
             if(currentItem.getIdentifier() == itemID)
@@ -38,13 +39,7 @@ public class Inventory
                 newItem.quantity = 1;
                 return newItem;
             }
-
         }
-        return null;
+        throw new IdentifierInvalidException();
     }
-
-    public void updateInventory(Sale completedSale)
-    {
-    }
-
 }

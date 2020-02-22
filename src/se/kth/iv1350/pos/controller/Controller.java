@@ -1,10 +1,7 @@
 package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.dbhandler.ExternalAccountingSystem;
-import se.kth.iv1350.pos.model.CashRegister;
-import se.kth.iv1350.pos.model.ObserverSale;
-import se.kth.iv1350.pos.model.Sale;
-import se.kth.iv1350.pos.model.SaleDTO;
+import se.kth.iv1350.pos.model.*;
 
 public class Controller
 {
@@ -22,9 +19,18 @@ public class Controller
         return cashRegister.startNewSale();
     }
 
-    public void scanItem(int itemID)
+    public void scanItem(int itemID) throws Exception
     {
-        cashRegister.scanItem(itemID);
+        try{
+            cashRegister.scanItem(itemID);
+        }
+        catch (DBFailureException dbFailure){
+            throw new DBFailureException();
+        }
+        catch(Exception idException){
+            throw new IdentifierInvalidException();
+        }
+
     }
 
     public Sale pay()
